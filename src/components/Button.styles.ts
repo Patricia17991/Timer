@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
 
 interface ButtonContainer {
     variant: ButtonVariant;
