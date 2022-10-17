@@ -7,7 +7,17 @@ interface ButtonContainer {
     variant: ButtonVariant;
 }
 
+
+const buttonVariants = {
+    primary: 'puple',
+    secondary : 'orange',
+    danger: 'red',
+    success: 'green',
+};
+
 export const ButtonContainer = styled.button<ButtonContainer>`
      width: 100px;
      height: 40px;
+
+     ${props => `background-color: ${buttonVariants[props.variant]}`}
 `
