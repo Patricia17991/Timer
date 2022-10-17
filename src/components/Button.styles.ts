@@ -7,7 +7,7 @@ interface ButtonContainer {
     variant: ButtonVariant;
 }
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button<ButtonContainer>`
      width: 100px;
      height: 40px;
 `
