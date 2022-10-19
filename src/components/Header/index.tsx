@@ -5,7 +5,7 @@ export function Header() {
     <HeaderContainer>
       <nav>
         <a href="">Timer</a>
-        <a href="History"></a>
+        <a href="">History</a>
       </nav>
     </HeaderContainer>
   )
