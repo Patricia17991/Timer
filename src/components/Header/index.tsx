@@ -1,3 +1,12 @@
+import { HeaderContainer } from './styles'
+
 export function Header() {
-  return <h1>Header</h1>
+  return (
+    <HeaderContainer>
+      <nav>
+        <a href="">Timer</a>
+        <a href="History"></a>
+      </nav>
+    </HeaderContainer>
+  )
 }
