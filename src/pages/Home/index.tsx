@@ -1,5 +1,5 @@
-import { Play } from "phosphor-react";
-import { CountdownContainer, FormContainer, HomeContainer, Separator, StartCountdownButton } from "./styles";
+import { Play } from 'phosphor-react'
+import { CountdownContainer, FormContainer, HomeContainer, Separator, StartCountdownButton } from './styles'
 
 export function Home() {
   return (
