@@ -7,6 +7,10 @@ export function Home() {
 
   const [task, setTask] = useState('')
 
+  function resetForm() {
+    setTask('')
+  }
+
   return (
     <HomeContainer>
       <form action="">
@@ -18,7 +22,7 @@ export function Home() {
             placeholder="Dê um nome para o seu projeto"
             onChange={(e) => setTask(e.target.value)}
             value={task}
-            />
+          />
 
          <dataList id="task-suggestions">
             <option value="Projeto 1" />
