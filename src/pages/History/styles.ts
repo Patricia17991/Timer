@@ -68,7 +68,7 @@ const STATUS_COLORS = {
 } as const //os valores estão sendo lidos como strins o 'as const' diz qual o valor de cada string.
 
 interface StatusProps {
-  statusColor: 'yellow' | 'red' | 'green'
+  statusColor: keyof typeof STATUS_COLORS
 }
 
 export const Status = styled.span<StatusProps>`
