@@ -32,9 +32,9 @@ export function Home() {
           </dataList>
 
           <label htmlFor="minutesAmount">durante</label>
-          <MinutesAmountInput 
-            type="number" 
-            id="minutesAmount" 
+          <MinutesAmountInput
+            type="number"
+            id="minutesAmount"
             placeholder="00"
             step={5}
             min={5}
@@ -51,7 +51,7 @@ export function Home() {
           <span>0</span>
         </CountdownContainer>
 
-        <StartCountdownButton disabled type="submit">
+        <StartCountdownButton disabled={!task} type="submit">
           <Play size={24} />
           Começar
         </StartCountdownButton>
