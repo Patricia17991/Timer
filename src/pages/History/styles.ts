@@ -62,8 +62,10 @@ export const HistoryList = styled.div`
 `
 
 const STATUS_COLORS = {
-    yellow: 
-}
+  yellow: 'yellow-500',
+  green: 'green-500',
+  red: 'red-500',
+} as const //os valores estão sendo lidos como strins o 'as const' diz qual o valor de cada string.
 
 interface StatusProps {
   statusColor: 'yellow' | 'red' | 'green'
@@ -79,6 +81,6 @@ export const Status = styled.span<StatusProps>`
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 9999px;
-    background: ${(props) => props.theme['yellow-500']};
+    background: ${(props) => props.theme[STATUS_COLORS[props.statusColor]]};
   }
 `
