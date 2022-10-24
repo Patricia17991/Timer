@@ -13,11 +13,13 @@ import { useForm } from 'react-hook-form'
 
 
 export function Home() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, watch } = useForm()
 
   function handleCreateNewCycle(data) {
 
   }
+
+  const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
 
   return (
     <HomeContainer>
@@ -59,7 +61,7 @@ export function Home() {
           <span>0</span>
         </CountdownContainer>
 
-        <StartCountdownButton /*disabled={!task}*/</form> type="submit">
+        <StartCountdownButton disabled={!task} type="submit">
           <Play size={24} />
           Começar
         </StartCountdownButton>
