@@ -14,13 +14,14 @@ import { useForm } from 'react-hook-form'
 
 export function Home() {
   const { register, handleSubmit } = useForm()
-  function handleSubmit(event) {
+
+  function handleCreateNewCycle(data) {
 
   }
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit} action="">
+      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormContainer>
           <label htmlFor="task">Vou trabalhar em</label>
           <TaskInput
@@ -45,6 +46,7 @@ export function Home() {
             step={5}
             min={5}
             max={60}
+            {...register('minutesAmount')}
           />
           <span>minutos.</span>
         </FormContainer>
