@@ -59,7 +59,7 @@ export function Home() {
           <span>0</span>
         </CountdownContainer>
 
-        <StartCountdownButton disabled={!task} type="submit">
+        <StartCountdownButton /*disabled={!task}*/</form> type="submit">
           <Play size={24} />
           Começar
         </StartCountdownButton>
