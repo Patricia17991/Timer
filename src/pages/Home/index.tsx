@@ -10,7 +10,8 @@ import {
 } from './styles'
 
 import { useForm } from 'react-hook-form'
-
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
 export function Home() {
   const { register, handleSubmit, watch } = useForm()
