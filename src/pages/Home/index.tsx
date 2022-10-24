@@ -1,27 +1,33 @@
 import { Play } from 'phosphor-react'
-import { CountdownContainer, FormContainer, HomeContainer, MinutesAmountInput, Separator, StartCountdownButton, TaskInput } from './styles'
-import { useState } from 'react'
+import {
+  CountdownContainer,
+  FormContainer,
+  HomeContainer,
+  MinutesAmountInput,
+  Separator,
+  StartCountdownButton,
+  TaskInput,
+} from './styles'
+
+import { useForm } from 'react-hook-form'
 
 
 export function Home() {
+  const { register, handleSubmit } = useForm()
+  function handleSubmit(event) {
 
-  const [task, setTask] = useState('')
-
-  function resetForm() {
-    setTask('')
   }
 
   return (
     <HomeContainer>
-      <form action="">
+      <form onSubmit={handleSubmit} action="">
         <FormContainer>
           <label htmlFor="task">Vou trabalhar em</label>
           <TaskInput 
             id="task"
+            name="task"
             list="task-suggestions"
             placeholder="Dê um nome para o seu projeto"
-            onChange={(e) => setTask(e.target.value)}
-            value={task}
           />
 
          <dataList id="task-suggestions">
@@ -42,7 +48,7 @@ export function Home() {
           />
           <span>minutos.</span>
         </FormContainer>
-            
+
         <CountdownContainer>
           <span>0</span>
           <span>0</span>
