@@ -17,21 +17,20 @@ import * as zod from 'zod'
 
 const newCycleValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
-  minutesAmount: zod.number()
+  minutesAmount: zod
+  .number()
   .min(5, 'O ciclo precisa ser de no mínimo 5 minutos')
   .max(60, 'O ciclo precisa ser no máximo 60 minutos'),
 })
 
 export function Home() {
-  const { register, handleSubmit, watch, formState } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     resolver: zodResolver(newCycleValidationSchema),
   })
 
   function handleCreateNewCycle(data:any) {
     console.log(data)
   }
-
-  console.log(formState.errors)
 
   const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
   const isSubmitDisabled = !task
