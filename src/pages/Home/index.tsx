@@ -23,10 +23,8 @@ const newCycleValidationSchema = zod.object({
   .max(60, 'O ciclo precisa ser no máximo 60 minutos'),
 })
 
-interface NewCycleFormData {
-  task: string
-  minutesAmount: number
-}
+
+type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
 
 export function Home() {
   const { register, handleSubmit, watch } = useForm<NewCycleFormData>({
