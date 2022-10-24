@@ -23,11 +23,11 @@ export function Home() {
       <form onSubmit={handleSubmit} action="">
         <FormContainer>
           <label htmlFor="task">Vou trabalhar em</label>
-          <TaskInput 
+          <TaskInput
             id="task"
-            name="task"
             list="task-suggestions"
             placeholder="Dê um nome para o seu projeto"
+            {...register('task')} //dou o nome para o input
           />
 
          <dataList id="task-suggestions">
