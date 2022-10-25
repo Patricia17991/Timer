@@ -28,7 +28,6 @@ interface Cycle {
   id: string
   task: string
   minutesAmount: number
-  isActive: boolean
 }
 
 type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
@@ -36,6 +35,7 @@ type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
 export function Home() {
 
   const [cycles, setCycles] = useState<Cycle[]>([])
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null) 
 
   const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
     resolver: zodResolver(newCycleValidationSchema),
