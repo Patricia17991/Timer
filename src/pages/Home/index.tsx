@@ -1,4 +1,8 @@
 import { Play } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { useState } from 'react'
 import {
   CountdownContainer,
   FormContainer,
@@ -8,12 +12,6 @@ import {
   StartCountdownButton,
   TaskInput,
 } from './styles'
-
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
-import { useState } from 'react'
-
 
 
 const newCycleValidationSchema = zod.object({
