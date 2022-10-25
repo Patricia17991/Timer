@@ -61,6 +61,8 @@ export function Home() {
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
    
+  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
+
   const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
   const isSubmitDisabled = !task
 
