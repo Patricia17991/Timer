@@ -2,7 +2,7 @@ import { Play } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { differenceInSeconds } from 'date-fns'
 import {
   CountdownContainer,
@@ -13,7 +13,6 @@ import {
   StartCountdownButton,
   TaskInput,
 } from './styles'
-
 
 const newCycleValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
@@ -33,7 +32,6 @@ interface Cycle {
 type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
 
 export function Home() {
-
   const [cycles, setCycles] = useState<Cycle[]>([])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null) 
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
@@ -50,11 +48,11 @@ export function Home() {
 
   useEffect(() => {
     if (activeCycle) {
-        setInterval(() => {
-            setAmountSecondsPassed(differenceInSeconds(new Date(),activeCycle.startDate ))
+      setInterval(() => {
+        setAmountSecondsPassed( differenceInSeconds(new Date(), activeCycle.startDate ))
         }, 1000)
     }
-  }, [])
+  }, [activeCycle])
 
   function handleCreateNewCycle(data: NewCycleFormData) {
    const id = String(new Date().getTime())
@@ -63,7 +61,7 @@ export function Home() {
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
-      startData: new Date(),
+      startDate: new Date(),
     }
 
     setCycles((state) => [...state, newCycle])
@@ -81,7 +79,7 @@ export function Home() {
   const minutes = String(minutesAmount).padStart(2, '0')
   const seconds = String(secondsAmount).padStart(2, '0')
 
-  const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
+  const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
@@ -93,10 +91,10 @@ export function Home() {
             id="task"
             list="task-suggestions"
             placeholder="Dê um nome para o seu projeto"
-            {...register('task')} //dou o nome para o input
+            {...register('task')}
           />
 
-         <dataList id="task-suggestions">
+          <dataList id="task-suggestions">
             <option value="Projeto 1" />
             <option value="Projeto 2" />
             <option value="Projeto 3" />
@@ -128,8 +126,7 @@ export function Home() {
           <Play size={24} />
           Começar
         </StartCountdownButton>
-    </form>
+      </form>
     </HomeContainer>
   )
-  
 }
