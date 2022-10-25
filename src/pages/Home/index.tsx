@@ -53,6 +53,7 @@ export function Home() {
     }
 
     setCycles((state) => [...state, newCycle])
+    setActiveCycleId(newCycle.id)
     reset()
   }
 
