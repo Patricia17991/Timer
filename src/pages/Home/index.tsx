@@ -28,6 +28,7 @@ interface Cycle {
   id: string
   task: string
   minutesAmount: number
+  isActive: boolean
 }
 
 type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
