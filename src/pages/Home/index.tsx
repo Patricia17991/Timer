@@ -26,7 +26,7 @@ interface Cycle {
   id: string
   task: string
   minutesAmount: number
-  start: Date
+  startDate: Date
 }
 
 type NewCycleFormData = zod.infer<typeof newCycleValidationSchema>
@@ -47,7 +47,7 @@ export function Home() {
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
   useEffect(() => {
-
+  
     let interval: number
 
     if (activeCycle) {
@@ -56,11 +56,11 @@ export function Home() {
           differenceInSeconds(new Date(), activeCycle.startDate),
         )
       }, 1000)
-  }
+    }
 
-  return () => {
-    clearInterval(interval)
-  }
+    return () => {
+      clearInterval(interval)
+    }
   }, [activeCycle])
 
   function handleCreateNewCycle(data: NewCycleFormData) {
