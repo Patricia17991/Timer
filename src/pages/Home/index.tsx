@@ -59,6 +59,8 @@ export function Home() {
     reset()
   }
 
+  const activeCycle = cycles.find( cycle => cycle.id === activeCycleId)
+   
   const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
   const isSubmitDisabled = !task
 
