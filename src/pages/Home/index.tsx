@@ -66,6 +66,10 @@ export function Home() {
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
 
   const minutesAmount = Math.floor(currentSeconds / 60 )
+  const secondsAmount = currentSeconds % 60
+
+  const minutes = String(minutesAmount).padStart(2, '0')
+  const seconds = String(secondsAmount).padStart(2, '0')
 
   const task = watch('task') //para saber o valor do campo de task em tempo real, assim o 'disable' vai funcionar aqui.
   const isSubmitDisabled = !task
