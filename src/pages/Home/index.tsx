@@ -1,86 +1,70 @@
-import styled from 'styled-components'
+import { HandPalm, Play } from 'phosphor-react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { useContext } from 'react'
 
-export const HistoryContainer = styled.main`
-  flex: 1;
-  padding: 3.5rem;
+import {
+  HomeContainer,
+  StartCountdownButton,
+  StopCountdownButton,
+} from './styles'
+import { NewCycleForm } from './components/NewCycleForm'
+import { Countdown } from './components/Countdown'
+import { CyclesContext } from '../../contexts/CyclesContext'
 
-  display: flex;
-  flex-direction: column;
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  minutesAmount: zod
+    .number()
+    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
+    .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
+})
 
-  h1 {
-    font-size: 1.5rem;
-    color: ${(props) => props.theme['gray-100']};
+type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
+
+export function Home() {
+  const { activeCycle, createNewCycle, interruptCurrentCycle } =
+    useContext(CyclesContext)
+
+  const newCycleForm = useForm<NewCycleFormData>({
+    resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: '',
+      minutesAmount: 0,
+    },
+  })
+
+  const { handleSubmit, watch, reset } = newCycleForm
+
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    createNewCycle(data)
+    reset()
   }
-`
 
-export const HistoryList = styled.div`
-  flex: 1;
-  overflow: auto;
-  margin-top: 2rem;
+  const task = watch('task')
+  const isSubmitDisable = !task
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
+  return (
+    <HomeContainer>
+      <form onSubmit={handleSubmit(handleCreateNewCycle)}>
+        <FormProvider {...newCycleForm}>
+          <NewCycleForm />
+        </FormProvider>
+        <Countdown />
 
-    th {
-      background-color: ${(props) => props.theme['gray-600']};
-      padding: 1rem;
-      text-align: left;
-      color: ${(props) => props.theme['gray-100']};
-      font-size: 0.875rem;
-      line-height: 1.6;
-
-      &:first-child {
-        border-top-left-radius: 8px;
-        padding-left: 1.5rem;
-      }
-
-      &:last-child {
-        border-top-right-radius: 8px;
-        padding-right: 1.5rem;
-      }
-    }
-
-    td {
-      background-color: ${(props) => props.theme['gray-700']};
-      border-top: 4px solid ${(props) => props.theme['gray-800']};
-      padding: 1rem;
-      font-size: 0.875rem;
-      line-height: 1.6;
-
-      &:first-child {
-        width: 50%;
-        padding-left: 1.5rem;
-      }
-
-      &:last-child {
-        padding-right: 1.5rem;
-      }
-    }
-  }
-`
-
-const STATUS_COLORS = {
-  yellow: 'yellow-500',
-  green: 'green-500',
-  red: 'red-500',
-} as const
-
-interface StatusProps {
-  statusColor: keyof typeof STATUS_COLORS
+        {activeCycle ? (
+          <StopCountdownButton onClick={interruptCurrentCycle} type="button">
+            <HandPalm size={24} />
+            Interromper
+          </StopCountdownButton>
+        ) : (
+          <StartCountdownButton disabled={isSubmitDisable} type="submit">
+            <Play size={24} />
+            Começar
+          </StartCountdownButton>
+        )}
+      </form>
+    </HomeContainer>
+  )
 }
-
-export const Status = styled.span<StatusProps>`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  &::before {
-    content: '';
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 9999px;
-    background: ${(props) => props.theme[STATUS_COLORS[props.statusColor]]};
-  }
-`
