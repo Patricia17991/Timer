@@ -1,4 +1,4 @@
-import { Play } from 'phosphor-react'
+import { HandPalm, Play } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
@@ -47,7 +47,6 @@ export function Home() {
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
   useEffect(() => {
-  
     let interval: number
 
     if (activeCycle) {
@@ -78,7 +77,7 @@ export function Home() {
     setAmountSecondsPassed(0)
 
     reset()
-  }
+}
 
 
   const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
@@ -139,10 +138,17 @@ export function Home() {
           <span>{seconds[1]}</span>
         </CountdownContainer>
 
-        <StartCountdownButton disabled={isSubmitDisabled} type="submit">
+        {activeCycle ? (
+            <StopCountdownButton type="button">
+            <HandPalm size={24} />
+             Começar
+            </StopCountdownButton>
+        ) : (
+            <StartCountdownButton disabled={isSubmitDisabled} type="submit">
           <Play size={24} />
-          Começar
-        </StartCountdownButton>
+            Começar
+           </StartCountdownButton>
+        )}
       </form>
     </HomeContainer>
   )
