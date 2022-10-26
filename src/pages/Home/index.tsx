@@ -143,7 +143,7 @@ export function Home() {
         {activeCycle ? (
             <StopCountdownButton type="button">
             <HandPalm size={24} />
-             Começar
+             Interromper
             </StopCountdownButton>
         ) : (
             <StartCountdownButton disabled={isSubmitDisabled} type="submit">
